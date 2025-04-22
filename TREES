@@ -1,0 +1,161 @@
+// 21st April 2025 -> trees
+import java.util.*;
+
+class Node {
+    int data;
+    Node left, right;
+
+    Node(int item) {
+        data = item;
+        left = right = null;
+    }
+}
+public class trees2 {
+
+//1. inorder traversal
+    public static void inorder(Node root) {
+        if (root == null) return;
+        inorder(root.left);
+        System.out.print(root.data + " ");
+        inorder(root.right);
+    }
+
+//2. height of the tree
+    public static int height(Node root) {
+        if (root == null) return 0;
+        int leftHeight = height(root.left);
+        int rightHeight = height(root.right);
+        return 1 + Math.max(leftHeight, rightHeight);
+    }
+
+//3. number of nodes
+    public static int countNodes(Node root) {
+        if (root == null) return 0;
+        int leftCount = countNodes(root.left);
+        int rightCount = countNodes(root.right);
+        return 1 + leftCount + rightCount;
+    }
+
+//4. search a particular code
+    public static boolean search(Node root, int k) {
+        if (root == null) return false;
+        if (root.data == k) return true;
+        return search(root.left, k) || search(root.right, k);
+    }
+
+    // 22nd April 2025
+
+//5. Print nodes present at the particular level
+    public static void printLevel(Node root, int k){
+        if(root==null)return;
+        if(k==1){
+            System.out.print(root.data+" ");
+        }
+        else{
+            printLevel(root.left,k-1);
+            printLevel(root.right,k-1);
+        }
+    }
+
+//6. Find the maximum node
+     public static int findMax(Node root) {
+        if (root == null) return Integer.MIN_VALUE;
+        int leftMax = findMax(root.left);
+        int rightMax = findMax(root.right);
+        return Math.max(root.data,Math.max(leftMax,rightMax));
+    }
+
+//7. count the number of leaves
+    public static int countLeaves(Node root){
+        if (root==null) return 0;
+        if( root.left==null && root.right==null) return 1;
+        return countLeaves(root.left)+countLeaves(root.right);
+    }
+
+    //problems
+
+//8. sum of all the nodes
+    public static int sumOfNodes(Node root) {
+        if (root == null) return 0;
+        return root.data + sumOfNodes(root.left) + sumOfNodes(root.right);
+    }
+
+//9. post order traversal
+    public static void postorder(Node root) {
+        if (root == null) return;
+        postorder(root.left);
+        postorder(root.right);
+        System.out.print(root.data + " ");
+    }
+
+//10. insert a new node at the first available position(level-order insertion)
+    public static void insertLevelOrder(Node root, int key) {
+        if (root == null) return;
+        Queue<Node> q = new LinkedList<>();
+        q.add(root);
+        while (!q.isEmpty()) {
+            Node temp = q.poll();
+            if (temp.left == null) {
+                temp.left = new Node(key);
+                break;
+            } else {
+                q.add(temp.left);
+            }
+            if (temp.right == null) {
+                temp.right = new Node(key);
+                break;
+            } else {
+                q.add(temp.right);
+            }
+        }
+    }
+
+
+    public static void main(String[] args) {
+        Node root = new Node(1);
+        root.left = new Node(2);
+        root.right = new Node(3);
+        root.left.left = new Node(4);
+        root.left.right = new Node(5);
+        // root.right.left = new Node(6);
+        // root.right.right = new Node(7);
+        // root.left.left.left = new Node(8);
+        // root.left.left.right = new Node(9);
+        // root.left.right.left = new Node(10);
+        // root.left.right.right = new Node(11);
+        // root.right.left.left = new Node(12);
+        // root.right.left.right = new Node(13);
+        // root.right.right.left = new Node(14);
+        // root.right.right.right = new Node(15);
+
+
+        //21
+        System.out.print("Inorder traversal: ");
+        inorder(root);
+        System.out.println();
+        System.out.println("Height: " + height(root));
+        System.out.println("Total no. of nodes: " + countNodes(root));
+        System.out.println("is 4 present: " + (search(root, 4)));
+        System.out.println("is 20 present: " + (search(root, 20)));
+
+        //22
+        System.out.println("Nodes at level 2 are : ");
+        printLevel(root,2);
+        System.out.println();
+        System.out.println("Max value: " + findMax(root));
+        System.out.println("No of leaves are: " + countLeaves(root));
+
+        //problems
+        System.out.println("Sum of all nodes: " + sumOfNodes(root));
+        System.out.print("Postorder traversal: ");
+        postorder(root);
+        System.out.println();
+        insertLevelOrder(root, 99);
+        System.out.println("Tree after inserting 99 (level-wise):");
+        printLevel(root, 1);
+        printLevel(root, 2);
+        printLevel(root, 3);
+        printLevel(root, 4);
+
+    }
+}
