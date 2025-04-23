@@ -1,4 +1,7 @@
+// Ridhima Sharma
 // 21st April 2025 -> trees
+
+
 import java.util.*;
 
 class Node {
@@ -12,7 +15,7 @@ class Node {
 }
 public class trees2 {
 
-//1. inorder traversal
+//1. Inorder traversal
     public static void inorder(Node root) {
         if (root == null) return;
         inorder(root.left);
@@ -20,7 +23,7 @@ public class trees2 {
         inorder(root.right);
     }
 
-//2. height of the tree
+//2. Height of the tree
     public static int height(Node root) {
         if (root == null) return 0;
         int leftHeight = height(root.left);
@@ -28,7 +31,7 @@ public class trees2 {
         return 1 + Math.max(leftHeight, rightHeight);
     }
 
-//3. number of nodes
+//3. Total Number of nodes
     public static int countNodes(Node root) {
         if (root == null) return 0;
         int leftCount = countNodes(root.left);
@@ -36,14 +39,14 @@ public class trees2 {
         return 1 + leftCount + rightCount;
     }
 
-//4. search a particular code
+//4. Search a particular code in the tree
     public static boolean search(Node root, int k) {
         if (root == null) return false;
         if (root.data == k) return true;
         return search(root.left, k) || search(root.right, k);
     }
 
-    // 22nd April 2025
+    // 22nd April 2025 -> trees
 
 //5. Print nodes present at the particular level
     public static void printLevel(Node root, int k){
@@ -65,7 +68,7 @@ public class trees2 {
         return Math.max(root.data,Math.max(leftMax,rightMax));
     }
 
-//7. count the number of leaves
+//7. Count the total number of leaves in the tree
     public static int countLeaves(Node root){
         if (root==null) return 0;
         if( root.left==null && root.right==null) return 1;
@@ -74,13 +77,13 @@ public class trees2 {
 
     //problems
 
-//8. sum of all the nodes
+//8. Sum of all the nodes present in the tree
     public static int sumOfNodes(Node root) {
         if (root == null) return 0;
         return root.data + sumOfNodes(root.left) + sumOfNodes(root.right);
     }
 
-//9. post order traversal
+//9. Post order traversal
     public static void postorder(Node root) {
         if (root == null) return;
         postorder(root.left);
@@ -88,7 +91,7 @@ public class trees2 {
         System.out.print(root.data + " ");
     }
 
-//10. insert a new node at the first available position(level-order insertion)
+//10. Insert a new node at the first available position(level-order insertion)
     public static void insertLevelOrder(Node root, int key) {
         if (root == null) return;
         Queue<Node> q = new LinkedList<>();
